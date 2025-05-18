@@ -2,7 +2,6 @@ from datetime import datetime
 from fastapi import APIRouter
 
 from app.schemas.sensor import HealthResponse
-from app.database.crud import count_sensor_data
 
 # Create router
 router = APIRouter(tags=["health"])

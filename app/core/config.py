@@ -22,7 +22,6 @@ class Settings(BaseModel):
     MAX_TEMPERATURE: float = 150.0
     MIN_HUMIDITY: float = 0.0
     MAX_HUMIDITY: float = 100.0
-    VALID_TIME: datetime = datetime.utcnow()
     
     # Pagination defaults
     DEFAULT_LIMIT: int = 10
