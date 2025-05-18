@@ -62,6 +62,7 @@ async def ingest_sensor_data(
 @router.get(
     "/data/{device_id}",
     response_model=DeviceReadingsResponse,
+    status_code=202,
     summary="Get device readings",
     description="Get the latest readings for a specific device.",
 )
