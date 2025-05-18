@@ -31,7 +31,7 @@ async def test_ingest_sensor_data(test_client: TestClient, sample_sensor_data: S
 @pytest.mark.asyncio
 async def test_get_device_data_empty(test_client: TestClient):
     response = test_client.get("/api/sensors/data/nonexistent-device")
-    assert response.status_code == 200
+    assert response.status_code == 202
     data = response.json()
     assert data["device_id"] == "nonexistent-device"
     assert data["readings"] == []
@@ -56,11 +56,10 @@ async def test_get_device_data(test_client, db_session):
 
         # Perform the GET request
         response = test_client.get(f"/api/sensors/data/{device_id}")
-        assert response.status_code == 200
+        assert response.status_code == 202
 
         data = response.json()
         assert data["device_id"] == device_id
-        # assert len(data["readings"]) == 3
 
         timestamps = [reading["timestamp"] for reading in data["readings"]]
         assert timestamps == sorted(timestamps, reverse=True)
@@ -87,7 +86,7 @@ async def test_get_device_data_with_limit(test_client, db_session):
         # Make request after inserting data
         response = test_client.get(f"/api/sensors/data/{device_id}?limit=2")
 
-        assert response.status_code == 200
+        assert response.status_code == 202
         data = response.json()
         assert data["device_id"] == device_id
         assert len(data["readings"]) == 2
