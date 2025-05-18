@@ -1,4 +1,3 @@
-# app/tests/conftest.py
 import os
 import pytest
 import asyncio
@@ -17,16 +16,12 @@ from sqlalchemy import delete
 from app.database.models import SensorData
 
 # Use an in-memory SQLite database for testing
-TEST_DATABASE_URL = "sqlite+aiosqlite:///:memory:"
+# TEST_DATABASE_URL = "sqlite+aiosqlite:///:memory:"
 
 # Create async engine for testing
-test_engine = create_async_engine(settings.TEST_DATABASE_URL, echo=True, connect_args={"check_same_thread": False})
+test_engine = create_async_engine(settings.DATABASE_URL, echo=True, connect_args={"check_same_thread": False})
 TestingSessionLocal = sessionmaker(test_engine, class_=AsyncSession, expire_on_commit=False)
 
-# async def init_test_db():
-#     async with test_engine.begin() as conn:
-#         await conn.run_sync(Base.metadata.drop_all)
-#         await conn.run_sync(Base.metadata.create_all)
 
 @pytest.fixture(scope="session")
 def event_loop():

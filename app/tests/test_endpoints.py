@@ -1,4 +1,3 @@
-# app/tests/test_endpoints.py
 import pytest
 from datetime import datetime, timedelta
 from fastapi.testclient import TestClient
